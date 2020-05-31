@@ -165,6 +165,9 @@
   <ItemGroup>
     <Text Include="example.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Debug\BasicTextReader.exe" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
