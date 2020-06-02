@@ -12,6 +12,7 @@
 #include <vector>
 using namespace std;
 
+vector<string> number;
 string line;
 
 vector<string> splitString(string txt, string delimiter)
@@ -90,12 +91,12 @@ int split(string txt, int r1, int r2)
 			string token2 = line.substr(curChar, 1);
 			int row = stoi(token1) + stoi(token2);
 			sum = sum + row;
-			//			cout << token1;
-			//			cout << token2;
-			//			cout << line << "/n";
-			//			int i = stoi(line);
-			//			sum = sum + i;
-			//			line << "/n";
+			//cout << token1;
+			//cout << token2;
+			//cout << line << "/n";
+			//int i = stoi(line);
+			//sum = sum + i;
+			//line << "/n";
 		}
 		myfile.close();
 		return sum;
@@ -110,12 +111,22 @@ int main()
 	ofstream Output("Fourier.txt");
 	int c1 = 0;
 	int c2 = 0;
+	string txt;
+//	cout << "Type the name of a file"
 	cout << "Type a number: ";
 	cin >> c1;
 	cout << "Type another number: ";
 	cin >> c2;
 	Output << split("example.txt", c1, c2);
-	Output.close();
+	cout << split("example.txt", c1, c2);
+//	number=splitString("example.txt", "		");
+//	int i = 0;
+//	while(i<number.size())
+//	{
+//		cout << number.at(i);
+//		i++;
+//	}
+//	Output.close();
 	return 0;
 }
 
