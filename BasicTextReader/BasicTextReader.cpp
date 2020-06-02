@@ -9,15 +9,61 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <vector>
 using namespace std;
 
 string line;
 
+vector<string> splitString(string txt, string delimiter)
+{
+	vector<string> answer;
+	string token;
+	ifstream myfile(txt);
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			//string curChar;
+			int curCharIndex = 0;
+			int lengthOfString = 0;
+			int startOfString = 0;
+			//while (curCharIndex < line.size())
+			//{
+			//	curChar=line.at(curCharIndex);
+			//	if (curChar == delimiter)
+			//	{
+
+			//	}
+			//}
+			// argument redefines curChar while also checking that line.find was able to fine a delimiter
+			while ((curCharIndex = line.find(delimiter, curCharIndex)) !=string::npos)
+			{
+				lengthOfString = curCharIndex - startOfString;
+				answer.push_back(line.substr(curCharIndex, 1));
+				startOfString = curCharIndex + delimiter.size();
+				curCharIndex = curCharIndex + 1;
+			}
+		}
+		myfile.close();
+		return answer;
+	}
+
+	else cout << "Unable to open file";
+}
+
 int split(string txt, int r1, int r2)
 {
-	if (r1 >= r2)
+	int c2 = 0;
+	int c1 = 0;
+	if (r1 > r2)
 	{
-		return -1;
+		c2 = r1;
+		c1 = r2;
+	}
+	else
+	{
+		c1 = r1;
+		c2 = r2;
 	}
 	string token1;
 	string token2;
@@ -30,13 +76,13 @@ int split(string txt, int r1, int r2)
 			int curChar = 0;
 			string delimiter = "	";
 			int i = 0;
-			while (i < r1)
+			while (i < c1)
 			{
 				curChar=line.find(delimiter,curChar)+1;
 				i++;
 			}
 			string token1 = line.substr(curChar, 1);
-			while (i < r2)
+			while (i < c2)
 			{
 				curChar = line.find(delimiter,curChar)+1;
 				i++;
@@ -61,7 +107,15 @@ int split(string txt, int r1, int r2)
 
 int main() 
 {
-	cout << split("example.txt", 0, 1);
+	ofstream Output("Fourier.txt");
+	int c1 = 0;
+	int c2 = 0;
+	cout << "Type a number: ";
+	cin >> c1;
+	cout << "Type another number: ";
+	cin >> c2;
+	Output << split("example.txt", c1, c2);
+	Output.close();
 	return 0;
 }
 
