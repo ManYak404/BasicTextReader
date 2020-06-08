@@ -119,14 +119,14 @@ int main()
 	cin >> c2;
 	Output << split("example.txt", c1, c2);
 	cout << split("example.txt", c1, c2);
-//	number=splitString("example.txt", "		");
-//	int i = 0;
-//	while(i<number.size())
-//	{
-//		cout << number.at(i);
-//		i++;
-//	}
-//	Output.close();
+	number=splitString("example.txt", "		");
+	int i = 0;
+	while(i<number.size())
+	{
+		cout << number.at(i)<<"/n";
+		i++;
+	}
+	Output.close();
 	return 0;
 }
 
