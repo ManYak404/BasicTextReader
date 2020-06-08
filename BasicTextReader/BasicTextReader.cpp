@@ -26,24 +26,33 @@ vector<string> splitString(string txt, string delimiter)
 		{
 			//string curChar;
 			int curCharIndex = 0;
+			string curChar;
 			int lengthOfString = 0;
 			int startOfString = 0;
-			//while (curCharIndex < line.size())
-			//{
-			//	curChar=line.at(curCharIndex);
-			//	if (curChar == delimiter)
-			//	{
-
-			//	}
-			//}
-			// argument redefines curChar while also checking that line.find was able to fine a delimiter
+			/*while (curCharIndex < line.size())
+			{
+				curChar=line.at(curCharIndex);
+				int i = startOfString;
+				while (i<curCharIndex)
+				{
+					if(line.substr(i,(curCharIndex-i))==delimiter))
+					{
+						startOfString=i+curCharIndex
+						cout < 1;
+					}
+				}
+			}*/
+			// argument redefines curChar while also checking that line.find was able to find a delimiter
 			while ((curCharIndex = line.find(delimiter, curCharIndex)) !=string::npos)
 			{
+
 				lengthOfString = curCharIndex - startOfString;
-				answer.push_back(line.substr(curCharIndex, 1));
+				answer.push_back(line.substr(startOfString, lengthOfString));
 				startOfString = curCharIndex + delimiter.size();
-				curCharIndex = curCharIndex + 1;
+				curCharIndex = curCharIndex + delimiter.size();
 			}
+			lengthOfString = line.size() - startOfString;
+			answer.push_back(line.substr(startOfString, lengthOfString));
 		}
 		myfile.close();
 		return answer;
@@ -119,11 +128,12 @@ int main()
 	cin >> c2;
 	Output << split("example.txt", c1, c2);
 	cout << split("example.txt", c1, c2);
-	number=splitString("example.txt", "		");
+	cout << "\n";
+	number=splitString("example2.txt", "  ");
 	int i = 0;
 	while(i<number.size())
 	{
-		cout << number.at(i)<<"/n";
+		cout << number.at(i)<<"\n";
 		i++;
 	}
 	Output.close();

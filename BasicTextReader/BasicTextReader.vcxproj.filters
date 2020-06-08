@@ -31,6 +31,9 @@
     <Text Include="example.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="example2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Debug\BasicTextReader.exe">

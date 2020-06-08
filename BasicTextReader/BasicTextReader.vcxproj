@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="example.txt" />
+    <Text Include="example2.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Debug\BasicTextReader.exe" />
