@@ -10,59 +10,34 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
+#include "BasicTextReader.h"
 using namespace std;
 
-vector<string> number;
-string line;
-
-vector<string> splitString(string txt, string delimiter)
+vector<string>* splitString(string txt, string delimiter)
 {
-	vector<string> answer;
+	string line;
+	vector<string>* answer = new vector<string>;
 	string token;
-	ifstream myfile(txt);
-	if (myfile.is_open())
+	int curCharIndex = 0;
+	int lengthOfString = 0;
+	int startOfString = 0;
+	// argument redefines curChar while also checking that line.find was able to find a delimiter
+	while ((curCharIndex = line.find(delimiter, curCharIndex)) !=string::npos)
 	{
-		while (getline(myfile, line))
-		{
-			//string curChar;
-			int curCharIndex = 0;
-			string curChar;
-			int lengthOfString = 0;
-			int startOfString = 0;
-			/*while (curCharIndex < line.size())
-			{
-				curChar=line.at(curCharIndex);
-				int i = startOfString;
-				while (i<curCharIndex)
-				{
-					if(line.substr(i,(curCharIndex-i))==delimiter))
-					{
-						startOfString=i+curCharIndex
-						cout < 1;
-					}
-				}
-			}*/
-			// argument redefines curChar while also checking that line.find was able to find a delimiter
-			while ((curCharIndex = line.find(delimiter, curCharIndex)) !=string::npos)
-			{
 
-				lengthOfString = curCharIndex - startOfString;
-				answer.push_back(line.substr(startOfString, lengthOfString));
-				startOfString = curCharIndex + delimiter.size();
-				curCharIndex = curCharIndex + delimiter.size();
-			}
-			lengthOfString = line.size() - startOfString;
-			answer.push_back(line.substr(startOfString, lengthOfString));
-		}
-		myfile.close();
-		return answer;
+		lengthOfString = curCharIndex - startOfString;
+		answer->push_back(line.substr(startOfString, lengthOfString));
+		startOfString = curCharIndex + delimiter.size();
+		curCharIndex = curCharIndex + delimiter.size();
 	}
-
-	else cout << "Unable to open file";
+	lengthOfString = line.size() - startOfString;
+	answer->push_back(line.substr(startOfString, lengthOfString));
+	return answer;
 }
 
 int split(string txt, int r1, int r2)
 {
+	string line;
 	int c2 = 0;
 	int c1 = 0;
 	if (r1 > r2)
@@ -113,15 +88,19 @@ int split(string txt, int r1, int r2)
 	}
 
 	else cout << "Unable to open file";
+	return 0;
 }
 
-int main() 
+int run()
 {
+	ifstream myfile("example2.txt");
+	vector<string>* number;
+	string line;
 	ofstream Output("Fourier.txt");
 	int c1 = 0;
 	int c2 = 0;
 	string txt;
-//	cout << "Type the name of a file"
+	//	cout << "Type the name of a file"
 	cout << "Type a number: ";
 	cin >> c1;
 	cout << "Type another number: ";
@@ -129,24 +108,48 @@ int main()
 	Output << split("example.txt", c1, c2);
 	cout << split("example.txt", c1, c2);
 	cout << "\n";
-	number=splitString("example2.txt", "  ");
-	int i = 0;
-	while(i<number.size())
+
+	if (myfile.is_open())
 	{
-		cout << number.at(i)<<"\n";
-		i++;
+		while (getline(myfile, line))
+		{
+			number = splitString(line, "  ");
+			int i = 0;
+			while (i < number->size())
+			{
+				cout << number->at(i) << "\n";
+				i++;
+			}
+			if (number) 
+			{
+				delete number;
+				number = NULL;
+			}
+		}
 	}
+	else cout << "Unable to open file";
+
+	myfile.close();
 	Output.close();
 	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+bool TestSplitString()
+{
+	vector<string>correctAnswer = { "a", "b" };
+	vector<string>* currentAnswer = NULL;
+	currentAnswer = splitString("a b", " ");
+	//static_assert(currentAnswer==correctAnswer);
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	if (currentAnswer) {
+		delete currentAnswer;
+		currentAnswer = NULL;
+	}
+	return true;
+}
+
+int main() 
+{
+	run();
+//	TestSplitString();
+}
