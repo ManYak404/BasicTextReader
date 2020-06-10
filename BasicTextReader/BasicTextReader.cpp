@@ -10,21 +10,19 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
-#include "BasicTextReader.h"
+//#include "BasicTextReader.h"
 using namespace std;
 
 vector<string>* splitString(string txt, string delimiter)
 {
-	string line;
-	vector<string>* answer = new vector<string>;
-	string token;
+	string line = txt;
+	vector<string>* answer=new vector<string>;
 	int curCharIndex = 0;
 	int lengthOfString = 0;
 	int startOfString = 0;
-	// argument redefines curChar while also checking that line.find was able to find a delimiter
+	// argument redefines curCharIndex while also checking that line.find was able to find a delimiter
 	while ((curCharIndex = line.find(delimiter, curCharIndex)) !=string::npos)
 	{
-
 		lengthOfString = curCharIndex - startOfString;
 		answer->push_back(line.substr(startOfString, lengthOfString));
 		startOfString = curCharIndex + delimiter.size();
@@ -84,7 +82,7 @@ int split(string txt, int r1, int r2)
 		}
 		myfile.close();
 		return sum;
-//		cout << sum;
+		cout << sum;
 	}
 
 	else cout << "Unable to open file";
@@ -93,7 +91,7 @@ int split(string txt, int r1, int r2)
 
 int run()
 {
-	ifstream myfile("example2.txt");
+	ifstream myfile("example.txt");
 	vector<string>* number;
 	string line;
 	ofstream Output("Fourier.txt");
@@ -113,7 +111,7 @@ int run()
 	{
 		while (getline(myfile, line))
 		{
-			number = splitString(line, "  ");
+			number = splitString(line, "	");
 			int i = 0;
 			while (i < number->size())
 			{
