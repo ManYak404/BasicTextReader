@@ -25,7 +25,7 @@ vector<string>* splitString(string txt, string delimiter)
 	{
 		lengthOfString = curCharIndex - startOfString;
 		answer->push_back(line.substr(startOfString, lengthOfString));
-		startOfString = curCharIndex + delimiter.size();
+		startOfString = curCharIndex + delimiter.size(); // nona
 		curCharIndex = curCharIndex + delimiter.size();
 	}
 	lengthOfString = line.size() - startOfString;
