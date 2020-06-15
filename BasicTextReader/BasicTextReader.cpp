@@ -113,7 +113,7 @@ int run()
 		{
 			number = splitString(line, "	");
 			int i = 0;
-			while (i < number->size())
+			while (i < (number->size()))
 			{
 				cout << number->at(i) << "\n";
 				i++;

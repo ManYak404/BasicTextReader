@@ -15,10 +15,10 @@ namespace splitStringTest
 		
 		TEST_METHOD(TestMethod1)
 		{
-			vector<string>correctAnswer = {"a", "b"};
+			/*vector<string>correctAnswer = {"a", "b"};
 			vector<string>currentAnswer;
 			currentAnswer=splitString("a b"," ");
-			Assert::AreEqual(1, 1);
+			Assert::AreEqual(1, 1);*/
 		}
 	};
 }
